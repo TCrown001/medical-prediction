@@ -13,11 +13,15 @@ class CreateDiseaseSypmtomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('disease_sypmtoms', function (Blueprint $table) {
+        Schema::create('disease_symptoms', function (Blueprint $table) {
             $table->id();
-            $table->integer('disease_id');
-            $table->integer('symptoms_id');
+            $table->unsignedBigInteger('disease_id');
+            $table->unsignedBigInteger('symptom_id');
             $table->timestamps();
+
+            // Define foreign keys
+            $table->foreign('disease_id')->references('id')->on('diseases')->onDelete('cascade');
+            $table->foreign('symptom_id')->references('id')->on('symptoms')->onDelete('cascade');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateDiseaseSypmtomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disease_sypmtoms');
+        Schema::dropIfExists('disease_symptoms');
     }
 }

@@ -35,6 +35,7 @@ Route::get('/deletesymptom/{id}', [App\Http\Controllers\SymptomController::class
 // Prediction
 Route::group(['prefix' => 'prediction'], function () {
     Route::get('/', [App\Http\Controllers\PredictionController::class, 'symptomprediction'])->name('prediction');
+    Route::post('/fetch-predicted-diseases', [App\Http\Controllers\PredictionController::class, 'predictedDiseases'])->name('fetch-predicted-diseases');
 });
 // Disease
 Route::group(['prefix' => 'disease'], function () {

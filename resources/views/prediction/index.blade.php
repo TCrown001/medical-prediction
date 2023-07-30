@@ -62,23 +62,31 @@
                             <div class="col-md-6 offset-3 pt-4">
                                 <h3 class="text-center">Prediction</h3><br>
                                 <div class="container">
+                                    <form id="formRecord">
+                                    @csrf
                                     <div class="repeater">
                                         <div class="repeater-item">
                                             <select name="data[]">
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
+                                                <option value="">Select Symptom</option>
+                                                @foreach($symptoms as $sym)
+                                                <option value="{{$sym->id}}">{{$sym->description}}</option>
                                                 <!-- Add more options as needed -->
+                                                @endforeach
+
                                             </select>
                                             <!-- Add more select fields or other form elements here -->
                                             <button class="remove-item">Remove</button>
                                         </div>
                                     </div>
 
-                                    <button class="add-item">Add More</button>
+                                    <button type="button" class="add-item">Add More</button>
                                     <button type="submit">Submit</button>
-
+                                    </form>
+                                    <h5 style="color:white;">Result</h5>
                                     <div class="btn btn-success">
-                                        <h5 style="color:white;">Result</h5>
+                                        <p style="color: white; font-size: 20">The predicted disease is: 
+                                    <span id="diseasePredicted"  style="color: red"></span>
+                                    </p>
                                     </div>
                                 </div>
                             </div>
@@ -92,35 +100,26 @@
     @section('scripts')
     <script>
     $(document).ready(function() {
-        // Function to fetch records from Laravel controller
-        function fetchRecordsFromController() {
-            $.ajax({
-                url: '/fetch-records', // Replace with the correct URL for your Laravel route
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Process the fetched data here (e.g., update your UI with the records)
-                    console.log(data); // Output the data to the console for demonstration
-                },
-                error: function(xhr, status, error) {
-                    console.error(error); // Log any errors to the console
+        // Function to fetch records from L
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
-        }
-
-        // Function to send data to Laravel controller
-        function sendDataToController(formData) {
+            })
+        function fetchRecordsFromController(formData) {
             $.ajax({
-                url: '/submit-data', // Replace with the correct URL for your Laravel route to handle the form submission
+                url: '/prediction/fetch-predicted-diseases',
                 type: 'POST',
                 data: formData,
                 dataType: 'json',
-                success: function(response) {
-                    // Process the response from the controller if needed
-                    console.log(response); // Output the response to the console for demonstration
+                success: function(response) {                    
+                    // console.log(response);
+                    var responseData = response.data;
+                    $("#diseasePredicted").text(responseData.description);
                 },
                 error: function(xhr, status, error) {
-                    console.error(error); // Log any errors to the console
+                    console.error(error); 
+                    alert(error);
                 }
             });
         }
@@ -128,13 +127,22 @@
         // Add item to the repeater
         $('.add-item').click(function() {
             var newItem =
-                '<div class="repeater-item"><select name="data[]"><option value="option1">Option 1</option><option value="option2">Option 2</option></select><button class="remove-item">Remove</button></div>';
+                `<div class="repeater-item"><select name="data[]">      
+                                              <option value="">Select Symptom</option>
+                                                @foreach($symptoms as $sym)
+                                                <option value="{{$sym->id}}">{{$sym->description}}</option>                                            
+                                                @endforeach
+                                                </select>
+                                                <button class="remove-item">Remove</button></div>`;
             $('.repeater').append(newItem);
         });
 
         // Remove item from the repeater
         $(document).on('click', '.remove-item', function() {
             $(this).parent('.repeater-item').remove();
+            var formData = $("#formRecord").serializeArray();
+            // sendDataToController(formData);
+            fetchRecordsFromController(formData);
         });
 
         // Form submission
@@ -147,11 +155,14 @@
         // Bind change event to select elements
         $(document).on('change', '.repeater-item select', function() {
             // Handle the change event here, if needed
-            // For example, you can fetch additional data based on the selected value
+            // console.log('here');
+            var formData = $("#formRecord").serializeArray();
+            // sendDataToController(formData);
+            fetchRecordsFromController(formData);
         });
 
         // Fetch records when the document is ready
-        fetchRecordsFromController();
+        // fetchRecordsFromController();
     });
     </script>
 

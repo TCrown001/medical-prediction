@@ -9,4 +9,8 @@ class Disease extends Model
 {
     use HasFactory;
     protected $guarded=[];
+    public function symptoms()
+    {
+        return $this->belongsToMany(Symptom::class, 'disease_symptoms');
+    }
 }
