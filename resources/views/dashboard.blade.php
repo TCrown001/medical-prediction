@@ -12,8 +12,8 @@
                                 <i class="fas fa-file-alt"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title">Total Users</div>
-                                <div class="dash-counts">
+                                <div class="dash-title">Total Diseases</div>
+                                <div class="dash-counts">{{$totaldisease}}
                                 </div>
                             </div>
                         </div>

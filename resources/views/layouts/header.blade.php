@@ -34,8 +34,7 @@
                 <span class="animate-circle"></span>
             </span>
             <span class="user-content">
-                <span class="user-details">Admin</span>
-                <span class="user-name">John Smith</span>
+                <span class="user-details">{{Auth::user()->name}}</span>
             </span>
         </a>
         <div class="dropdown-menu menu-drop-user">

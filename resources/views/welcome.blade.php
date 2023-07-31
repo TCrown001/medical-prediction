@@ -86,13 +86,13 @@
       <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12">
           <div class="hlc_topheader_textleft">
-            <p><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Opening Hours: 6.00 am - 11.00 pm (Mon - Sat)
+            <p><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Project Design By Aminu Saidat Ayomide
             </p>
           </div>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
           <div class="hlc_topheader_textright">
-            <p><i class="fa fa-volume-control-phone" aria-hidden="true"></i> Question? Call Us at +(0321) 752 8659</p>
+            <p><i class="" aria-hidden="true"></i> Matric No: ND/21/COM/FT/008</p>
           </div>
         </div>
       </div>

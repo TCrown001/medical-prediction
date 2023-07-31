@@ -27,6 +27,12 @@
                 </li>
             </ul>
             
+            <ul>
+                <li>
+                    <a href="{{route('changePassword')}}"><i class="fe fe-home"></i> <span>Change Password</span></a>
+                </li>
+            </ul>
+            
 
         </div>
     </div>

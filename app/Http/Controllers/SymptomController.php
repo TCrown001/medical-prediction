@@ -22,6 +22,19 @@ class SymptomController extends Controller
         return redirect()->back()->with('success', 'Patient created successfully');
     }
 
+    public function update_symptom(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        // dd($id);
+        $symptom = Symptom::find($id);
+
+        $symptom->update($input);
+
+        return redirect()->back()->with('success', 'Record updated successfully');
+        // code...
+    }
+
     public function delete_symptom(Request $request)
     {
         $id = $request->id;

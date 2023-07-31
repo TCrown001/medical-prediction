@@ -204,6 +204,72 @@
             </div>
         </div>
     </div>
+    <!-- Edit Disease -->
+
+        <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal">Disease</h3>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Add
+                        Disease</button> -->
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('save_Disease') }}" id="saveCategories">
+                        @csrf
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <input type="text" class="form-control" name="disease" required>
+                        </div>
+                        <div class="form-group">
+                        <table class="_table">
+                                        <thead>
+                                            <tr>
+                                                <th>Symptom</th>
+                                                <th width="50px">
+                                                    <div class="action_container">
+                                                        <button type="button" class="success" onclick="create_tr('table_body')">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table_body">
+                                            <tr>
+                                                <td>
+                                                    <select name="symptoms_ids[]" class="form-control">
+                                                        <option value="">Select Symptom</option>
+                                                        @foreach ($symptoms as $symptom)
+                                                        <option value="{{ $symptom->id }}">{{ $symptom->description }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <div class="action_container">
+                                                        <button class="danger" onclick="remove_tr('This')">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-secondary">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Doctor;
+use Illuminate\Http\Request;
+
 class DoctorController extends Controller
 {
     public function doctor()
@@ -20,6 +21,20 @@ class DoctorController extends Controller
         $input = Doctor::create($request->all());
         // $input->save();
         return redirect()->back()->with('success', 'Doctor created successfully');
+    }
+
+    // Edit
+    public function update_doctor(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        // dd($id);
+        $doctor = Doctor::find($id);
+
+        $doctor->update($input);
+
+        return redirect()->back()->with('success', 'Record updated successfully');
+        // code...
     }
 
     public function delete_doctor(Request $request)

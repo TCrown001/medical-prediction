@@ -106,12 +106,13 @@
                                     <!-- <td>{{$doctor->occupation}}</td> -->
                                     <td>{{$doctor->marital_status}}</td>
                                     <td>
-                                                <a class="btn btn-success" href="" data-bs-toggle="modal" data-bs-target="#modal{{$doctor->id}}"> Edit</a>
-                                               
-                                                <a href="{{ route('deleteDoctor',$doctor->id) }}" data-id="{{ $doctor->id }}"
-                                                        onclick="return confirm('Are you sure you want to delete this Doctor?')"
-                                                        class="btn btn-sm btn-danger" id="deleteRecord"> delete</a>
-                                             
+                                        <a class="btn btn-success text-white" href="" data-bs-toggle="modal"
+                                            data-bs-target="#modal{{$doctor->id}}"> Edit</a>
+
+                                        <a href="{{ route('deleteDoctor',$doctor->id) }}" data-id="{{ $doctor->id }}"
+                                            onclick="return confirm('Are you sure you want to delete this Doctor?')"
+                                            class="btn btn-sm btn-danger text-white" id="deleteRecord"> delete</a>
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -122,6 +123,70 @@
             </div>
         </div>
     </div>
+
+
+    <!--Edit  -->
+
+    <!-- Modal -->
+    @foreach($doctors as $doctor)
+    <div class="modal fade" id="modal{{$doctor->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal"> Edit Doctor</h3>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Add
+                        Doctor</button> -->
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/update_doctor/{{ $doctor->id }}" id="saveCategories">
+                        @csrf
+                        <div class="form-group">
+                            <label>first Name:</label>
+                            <input type="text" class="form-control" name="firstName" value="{{ $doctor->firstName }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>last Name:</label>
+                            <input type="text" class="form-control" name="lastName" value="{{ $doctor->lastName }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="email" value="{{ $doctor->email }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="phone" class="form-control" name="phone" value="{{ $doctor->phone }}" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Marital Status:</label>
+                            <select class="form-control" name="marital_status" id="">
+                                <option value="">Signle</option>
+                                <option value="">Maried</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <label>Occupation:</label>
+                            <input type="text" class="form-control" name="occupation" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label>Sex:</label>
+                            <select class="form-control" name="marital_status" id="">
+                                <option value="">Male</option>
+                                <option value="">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-secondary ml-3">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endforeach
 </div>
 
 @endsection

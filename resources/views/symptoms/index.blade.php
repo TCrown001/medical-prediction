@@ -33,7 +33,7 @@
                             <label>Description:</label>
                             <input type="text" class="form-control" name="description" required>
                         </div>
-                        
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-secondary">Save</button>
@@ -66,11 +66,12 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$symptom->description}}</td>
                                     <td>
-                                    <a class="btn btn-success" href="" data-bs-toggle="modal" data-bs-target="#modal{{$symptom->id}}"> Edit</a>
-                                               
-                                               <a href="{{ route('deleteSymptom',$symptom->id) }}" data-id="{{ $symptom->id }}"
-                                                       onclick="return confirm('Are you sure you want to delete this Symptom?')"
-                                                       class="btn btn-sm btn-danger" id="deleteRecord"> delete</a>
+                                        <a class="btn btn-success text-white" href="" data-bs-toggle="modal"
+                                            data-bs-target="#modal{{$symptom->id}}"> Edit</a>
+
+                                        <a href="{{ route('deleteSymptom',$symptom->id) }}" data-id="{{ $symptom->id }}"
+                                            onclick="return confirm('Are you sure you want to delete this Symptom?')"
+                                            class="btn btn-sm btn-danger text-white" id="deleteRecord"> delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -81,6 +82,38 @@
             </div>
         </div>
     </div>
+    <!-- Edit Modal -->
+
+    <!-- Modal -->
+    @foreach($symptoms as $symptom)
+    <div class="modal fade" id="modal{{$symptom->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal">Edit Symptoms</h3>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Add
+                        Symptoms</button> -->
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/update_symptom/{{ $symptom->id }}" id="saveCategories">
+                        @csrf
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <input type="text" class="form-control" name="description" value="{{$symptom->description}}" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-secondary">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endforeach
 </div>
 
 @endsection

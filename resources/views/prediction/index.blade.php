@@ -80,12 +80,12 @@
                                     </div>
 
                                     <button type="button" class="add-item">Add More</button>
-                                    <button type="submit">Submit</button>
+                                    <!-- <button type="submit">Submit</button> -->
                                     </form>
                                     <h5 style="color:white;">Result</h5>
                                     <div class="btn btn-success">
-                                        <p style="color: white; font-size: 20">The predicted disease is: 
-                                    <span id="diseasePredicted"  style="color: red"></span>
+                                        <p style="color: white; font-size: 20">The predicted disease is: <b>
+                                    <span id="diseasePredicted"  style="color: #fff; font-size:24px;"></span></b>
                                     </p>
                                     </div>
                                 </div>
